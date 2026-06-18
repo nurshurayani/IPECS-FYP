@@ -2,12 +2,31 @@ import streamlit as st
 import os
 from data.sample_data import DEFAULT_TRANSACTIONS, DEFAULT_BUDGETS, DEFAULT_ALERTS
 
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+if not st.session_state.logged_in:
+    st.markdown("<h1 style='text-align:center;color:#0F7B6C'>💳 IPECS</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center'>Intelligent Personal Expense Classification System</p>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        if st.button("Login", use_container_width=True):
+            if username == "amirul" and password == "ipecs2025":
+                st.session_state.logged_in = True
+                st.rerun()
+            else:
+                st.error("Incorrect username or password")
+        st.caption("Demo credentials — Username: amirul | Password: ipecs2025")
+    st.stop()
+
 # Set page config
 st.set_page_config(
-    page_title="IPECS - Intelligent Personal Expense Classification System",
+    page_title="IPECS - Intelligent Personal Expense Categorization System",
     page_icon="💳",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # Custom CSS brand styling as requested
@@ -24,8 +43,9 @@ st.markdown("""
         background-color: #0a5c51;
     }
     /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background-color: #f8fffe;
+    [data-testid="stSidebarNav"] { display: none; }
+            @media (max-width: 768px) {
+            [data-testid="stSidebar"] {width: 100% !important;
     }
     /* Metric cards */
     [data-testid="stMetric"] {
