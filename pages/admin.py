@@ -103,16 +103,16 @@ def show_admin():
 
     if "admin_simulated_transactions" not in st.session_state:
         st.session_state.admin_simulated_transactions = [
-            {"id": "sim_1", "user": "Siti Aminah", "merchant": "RapidKL LRT", "category": "Transport", "amount": 4.50, "date": "2025-06-02", "source": "manual", "flagged": False},
-            {"id": "sim_2", "user": "Siti Aminah", "merchant": "Guardian Pharmacy", "category": "Shopping", "amount": 42.10, "date": "2025-06-03", "source": "ocr", "flagged": False},
-            {"id": "sim_3", "user": "Siti Aminah", "merchant": "Mamak Corner", "category": "Food & Dining", "amount": 15.60, "date": "2025-06-05", "source": "manual", "flagged": False},
-            {"id": "sim_4", "user": "Teoh Wei Jie", "merchant": "Steam Games Store", "category": "Entertainment", "amount": 120.00, "date": "2025-06-01", "source": "manual", "flagged": True},
-            {"id": "sim_5", "user": "Teoh Wei Jie", "merchant": "Grab Food", "category": "Food & Dining", "amount": 34.50, "date": "2025-06-04", "source": "ocr", "flagged": False},
-            {"id": "sim_6", "user": "Teoh Wei Jie", "merchant": "Digi Telecommunications", "category": "Bills", "amount": 50.00, "date": "2025-06-06", "source": "manual", "flagged": False},
-            {"id": "sim_7", "user": "Arun Kumar", "merchant": "Shell Petrol", "category": "Transport", "amount": 40.00, "date": "2025-06-08", "source": "manual", "flagged": False},
-            {"id": "sim_8", "user": "Arun Kumar", "merchant": "Giant Hypermarket", "category": "Shopping", "amount": 115.30, "date": "2025-06-11", "source": "ocr", "flagged": False},
-            {"id": "sim_9", "user": "Arun Kumar", "merchant": "Kopi Kebun", "category": "Food & Dining", "amount": 18.00, "date": "2025-06-12", "source": "manual", "flagged": False},
-            {"id": "sim_10", "user": "Nurul Izzah", "merchant": "Nasi Kandar Pelita", "category": "Food & Dining", "amount": 12.80, "date": "2025-06-14", "source": "ocr", "flagged": False},
+            {"id": "TXN-2025-001", "user": "Siti Aminah", "merchant": "RapidKL LRT", "category": "Transport", "amount": 4.50, "date": "2025-06-02", "source": "manual", "flagged": False},
+            {"id": "TXN-2025-002", "user": "Siti Aminah", "merchant": "Guardian Pharmacy", "category": "Shopping", "amount": 42.10, "date": "2025-06-03", "source": "ocr", "flagged": False},
+            {"id": "TXN-2025-003", "user": "Siti Aminah", "merchant": "Mamak Corner", "category": "Food & Dining", "amount": 15.60, "date": "2025-06-05", "source": "manual", "flagged": False},
+            {"id": "TXN-2025-004", "user": "Teoh Wei Jie", "merchant": "Steam Games Store", "category": "Entertainment", "amount": 120.00, "date": "2025-06-01", "source": "manual", "flagged": True},
+            {"id": "TXN-2025-005", "user": "Teoh Wei Jie", "merchant": "Grab Food", "category": "Food & Dining", "amount": 34.50, "date": "2025-06-04", "source": "ocr", "flagged": False},
+            {"id": "TXN-2025-006", "user": "Teoh Wei Jie", "merchant": "Digi Telecommunications", "category": "Bills", "amount": 50.00, "date": "2025-06-06", "source": "manual", "flagged": False},
+            {"id": "TXN-2025-007", "user": "Arun Kumar", "merchant": "Shell Petrol", "category": "Transport", "amount": 40.00, "date": "2025-06-08", "source": "manual", "flagged": False},
+            {"id": "TXN-2025-008", "user": "Arun Kumar", "merchant": "Giant Hypermarket", "category": "Shopping", "amount": 115.30, "date": "2025-06-11", "source": "ocr", "flagged": False},
+            {"id": "TXN-2025-009", "user": "Arun Kumar", "merchant": "Kopi Kebun", "category": "Food & Dining", "amount": 18.00, "date": "2025-06-12", "source": "manual", "flagged": False},
+            {"id": "TXN-2025-010", "user": "Nurul Izzah", "merchant": "Nasi Kandar Pelita", "category": "Food & Dining", "amount": 12.80, "date": "2025-06-14", "source": "ocr", "flagged": False},
         ]
 
 
