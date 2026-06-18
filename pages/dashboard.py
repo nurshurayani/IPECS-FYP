@@ -47,12 +47,12 @@ def show_dashboard():
     with col3:
         st.metric(t_tx, f"{tx_week_count} transactions")
     with col4:
-        st.metric(t_alerts, f"{active_alerts_count} active") if active_alerts_count > 0:
-        if st.button("🔔 Check Alerts!", use_container_width=True):
-            st.session_state.page = "AI Forecast & Alerts"
-            st.rerun()
-
-    st.write("")
+        st.metric(t_alerts, f"{active_alerts_count} active")
+        if active_alerts_count > 0:
+            if st.button("🔔 Check Alerts!", use_container_width=True):
+                st.session_state.page = "AI Forecast & Alerts"
+                st.rerun()
+        st.write("")
 
     # Row 2 - Donut chart and bar comparison
     col_left, col_right = st.columns(2)
