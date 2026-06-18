@@ -54,13 +54,19 @@ export default function ForecastAlertsPage({
         body: JSON.stringify({ transactions, budgets }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to reach AI server. Make sure GEMINI_API_KEY is active.');
+      let result: any = null;
+      try {
+        result = await response.json();
+      } catch (jsonErr) {
+        // Response content is not JSON (e.g. gateway timeout or crash HTML)
       }
 
-      const result = await response.json();
-      if (result.error) {
+      if (result && result.error) {
         throw new Error(result.error);
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to reach AI server. Make sure GEMINI_API_KEY is active.');
       }
 
       setForecast(result);

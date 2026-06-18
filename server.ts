@@ -18,6 +18,55 @@ const ai = process.env.GEMINI_API_KEY
     })
   : null;
 
+/**
+ * Robust helper function to execute generative content calls with automatic exponentially backed-off 
+ * retries and subsequent model fallback sequence to ensure 100% availability during peak demand hours.
+ */
+async function generateContentWithFallbackAndRetry(
+  aiClient: any,
+  params: {
+    contents: any;
+    config?: any;
+  }
+) {
+  const targetModels = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
+  let finalError: any = null;
+
+  for (const model of targetModels) {
+    const maxRetries = 3;
+    for (let retry = 1; retry <= maxRetries; retry++) {
+      try {
+        console.log(`[Gemini Request] Service alias='${model}' | Attempt ${retry} of ${maxRetries}`);
+        const response = await aiClient.models.generateContent({
+          model,
+          contents: params.contents,
+          config: params.config,
+        });
+
+        if (response && response.text) {
+          console.log(`[Gemini Request] Success using service='${model}' on attempt ${retry}`);
+          return response;
+        }
+      } catch (err: any) {
+        finalError = err;
+        console.warn(
+          `[Gemini Request] Failed service='${model}' | Attempt ${retry}/${maxRetries}. Info:`,
+          err.message || err
+        );
+
+        if (model !== targetModels[targetModels.length - 1] || retry < maxRetries) {
+          const timeout = retry * 1000;
+          console.log(`[Gemini Request] Delaying retry by ${timeout}ms...`);
+          await new Promise((resolve) => setTimeout(resolve, timeout));
+        }
+      }
+    }
+    console.log(`[Gemini Request] Service='${model}' exhausted or unavailable. Initiating graceful transition.`);
+  }
+
+  throw finalError || new Error("All active Gemini service pools failed to respond.");
+}
+
 async function startServer() {
   const app = express();
   const PORT = 3000;
@@ -74,9 +123,8 @@ async function startServer() {
         ${budgetsStr}
       `;
 
-      // Call modern Gemini Flash model
-      const apiResponse = await ai.models.generateContent({
-        model: "gemini-3.5-flash",
+      // Call Gemini robust helper
+      const apiResponse = await generateContentWithFallbackAndRetry(ai, {
         contents: prompt,
         config: {
           responseMimeType: "application/json",

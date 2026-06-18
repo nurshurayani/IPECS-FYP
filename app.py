@@ -55,7 +55,16 @@ if "lang" not in st.session_state:
     st.session_state.lang = "EN"
 
 if "page" not in st.session_state:
-    st.session_state.page = "Dashboard"
+    st.session_state.page = "User Account"
+
+if "user_profile" not in st.session_state:
+    st.session_state.user_profile = {
+        "name": "Amirul Syafiq",
+        "university": "Universiti Malaysia Sabah",
+        "student_id": "BI23100011",
+        "age": 21,
+        "allowance_range": "RM500-RM1000"
+    }
 
 # 2. Sidebar Layout
 with st.sidebar:
@@ -64,28 +73,39 @@ with st.sidebar:
     
     st.divider()
     
-    # User profile
-    st.markdown("""
+    # User profile (dynamic from session state)
+    is_bm = (st.session_state.lang == "BM")
+    profile = st.session_state.user_profile
+    user_header = "PENGGUNA SEMASA" if is_bm else "CURRENT USER"
+    st.markdown(f"""
     <div style='background-color: white; padding: 12px; border-radius: 8px; border: 1px solid #e0f1ee; margin-bottom: 15px;'>
-        <p style='color: #0F7B6C; font-size: 10px; font-family: monospace; font-weight: bold; margin: 0;'>CURRENT USER</p>
-        <p style='margin: 3px 0 0 0; font-size: 13px; font-weight: bold; color: #333;'>Amirul Syafiq</p>
-        <p style='margin: 0; font-size: 11px; color: #666;'>UM Student • 21 y/o</p>
+        <p style='color: #0F7B6C; font-size: 10px; font-family: monospace; font-weight: bold; margin: 0;'>{user_header}</p>
+        <p style='margin: 3px 0 0 0; font-size: 13px; font-weight: bold; color: #333;'>{profile['name']}</p>
+        <p style='margin: 0; font-size: 11px; color: #666;'>{profile['university']} • {profile['age']} y/o</p>
     </div>
     """, unsafe_allow_html=True)
 
     # Navigation options
+    account_label = "👤 Akaun Pengguna" if is_bm else "👤 User Account"
     pages = [
         "🏠 Dashboard",
         "🧾 Receipt & Transaction Entry",
         "🔀 Transaction & Category Management",
         "🎯 Budget Goal Management",
         "📊 Spending Reports",
-        "🤖 AI Forecast & Alerts"
+        "🤖 AI Forecast & Alerts",
+        account_label
     ]
     
     # Pre-select matching page selection
     current_idx = 0
     clean_page_name = st.session_state.page
+    
+    # Normalize clean_page_name for robust matching when language toggles
+    if clean_page_name in ["User Account", "Akaun Pengguna"]:
+        clean_page_name = "Akaun Pengguna" if is_bm else "User Account"
+        st.session_state.page = clean_page_name
+        
     for i, p in enumerate(pages):
         if clean_page_name in p:
             current_idx = i
@@ -119,3 +139,6 @@ elif st.session_state.page == "Spending Reports":
 elif st.session_state.page == "AI Forecast & Alerts":
     from pages.forecast_alerts import show_forecast_alerts
     show_forecast_alerts()
+elif st.session_state.page in ["User Account", "Akaun Pengguna"]:
+    from pages.account import show_account
+    show_account()
