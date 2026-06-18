@@ -29,7 +29,7 @@ async function generateContentWithFallbackAndRetry(
     config?: any;
   }
 ) {
-  const targetModels = ["gemini-3.5-flash", "gemini-3.1-flash-lite"];
+  const targetModels = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-2.5-flash"];
   let finalError: any = null;
 
   for (const model of targetModels) {
