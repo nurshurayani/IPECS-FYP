@@ -66,6 +66,9 @@ if "user_profile" not in st.session_state:
         "allowance_range": "RM500-RM1000"
     }
 
+if "admin_authenticated" not in st.session_state:
+    st.session_state.admin_authenticated = False
+
 # 2. Sidebar Layout
 with st.sidebar:
     st.markdown("<h2 style='color:#0F7B6C; margin-bottom:0;'>💳 IPECS</h2>", unsafe_allow_html=True)
@@ -73,6 +76,10 @@ with st.sidebar:
     
     st.divider()
     
+    # Red ADMIN MODE badge
+    if st.session_state.get("admin_authenticated") == True:
+        st.sidebar.error("🔐 ADMIN MODE")
+        
     # User profile (dynamic from session state)
     is_bm = (st.session_state.lang == "BM")
     profile = st.session_state.user_profile
@@ -87,6 +94,7 @@ with st.sidebar:
 
     # Navigation options
     account_label = "👤 Akaun Pengguna" if is_bm else "👤 User Account"
+    admin_label = "🔐 Panel Admin" if is_bm else "🔐 Admin Panel"
     pages = [
         "🏠 Dashboard",
         "🧾 Receipt & Transaction Entry",
@@ -94,7 +102,8 @@ with st.sidebar:
         "🎯 Budget Goal Management",
         "📊 Spending Reports",
         "🤖 AI Forecast & Alerts",
-        account_label
+        account_label,
+        admin_label
     ]
     
     # Pre-select matching page selection
@@ -104,6 +113,9 @@ with st.sidebar:
     # Normalize clean_page_name for robust matching when language toggles
     if clean_page_name in ["User Account", "Akaun Pengguna"]:
         clean_page_name = "Akaun Pengguna" if is_bm else "User Account"
+        st.session_state.page = clean_page_name
+    elif clean_page_name in ["Admin Panel", "Panel Admin"]:
+        clean_page_name = "Panel Admin" if is_bm else "Admin Panel"
         st.session_state.page = clean_page_name
         
     for i, p in enumerate(pages):
@@ -142,3 +154,6 @@ elif st.session_state.page == "AI Forecast & Alerts":
 elif st.session_state.page in ["User Account", "Akaun Pengguna"]:
     from pages.account import show_account
     show_account()
+elif st.session_state.page in ["Admin Panel", "Panel Admin"]:
+    from pages.admin import show_admin
+    show_admin()
