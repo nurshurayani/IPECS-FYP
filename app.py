@@ -80,17 +80,29 @@ with st.sidebar:
     if st.session_state.get("admin_authenticated") == True:
         st.sidebar.error("🔐 ADMIN MODE")
         
-    # User profile (dynamic from session state)
+    # User profile (dynamic from session state or administrator override)
     is_bm = (st.session_state.lang == "BM")
-    profile = st.session_state.user_profile
-    user_header = "PENGGUNA SEMASA" if is_bm else "CURRENT USER"
-    st.markdown(f"""
-    <div style='background-color: white; padding: 12px; border-radius: 8px; border: 1px solid #e0f1ee; margin-bottom: 15px;'>
-        <p style='color: #0F7B6C; font-size: 10px; font-family: monospace; font-weight: bold; margin: 0;'>{user_header}</p>
-        <p style='margin: 3px 0 0 0; font-size: 13px; font-weight: bold; color: #333;'>{profile['name']}</p>
-        <p style='margin: 0; font-size: 11px; color: #666;'>{profile['university']} • {profile['age']} y/o</p>
-    </div>
-    """, unsafe_allow_html=True)
+    if st.session_state.get("admin_authenticated") == True:
+        user_header = "PENTADBIR" if is_bm else "ADMINISTRATOR"
+        admin_name = "System Administrator" if not is_bm else "Pentadbir Sistem"
+        admin_role = "Admin • Full Access" if not is_bm else "Admin • Akses Penuh"
+        st.markdown(f"""
+        <div style='background-color: white; padding: 12px; border-radius: 8px; border: 1px solid #e0f1ee; margin-bottom: 15px;'>
+            <p style='color: #0F7B6C; font-size: 10px; font-family: monospace; font-weight: bold; margin: 0;'>{user_header}</p>
+            <p style='margin: 3px 0 0 0; font-size: 13px; font-weight: bold; color: #333;'>{admin_name}</p>
+            <p style='margin: 0; font-size: 11px; color: #666;'>{admin_role}</p>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        profile = st.session_state.user_profile
+        user_header = "PENGGUNA SEMASA" if is_bm else "CURRENT USER"
+        st.markdown(f"""
+        <div style='background-color: white; padding: 12px; border-radius: 8px; border: 1px solid #e0f1ee; margin-bottom: 15px;'>
+            <p style='color: #0F7B6C; font-size: 10px; font-family: monospace; font-weight: bold; margin: 0;'>{user_header}</p>
+            <p style='margin: 3px 0 0 0; font-size: 13px; font-weight: bold; color: #333;'>{profile['name']}</p>
+            <p style='margin: 0; font-size: 11px; color: #666;'>{profile['university']} • {profile['age']} y/o</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Navigation options
     account_label = "👤 Akaun Pengguna" if is_bm else "👤 User Account"

@@ -103,16 +103,16 @@ def show_admin():
 
     if "admin_simulated_transactions" not in st.session_state:
         st.session_state.admin_simulated_transactions = [
-            {"id": "sim_1", "User": "Siti Aminah", "Merchant": "RapidKL LRT", "Category": "Transport", "Amount": 4.50, "Date": "2025-06-02", "Source": "manual", "Flagged": False},
-            {"id": "sim_2", "User": "Siti Aminah", "Merchant": "Guardian Pharmacy", "Category": "Shopping", "Amount": 42.10, "Date": "2025-06-03", "Source": "ocr", "Flagged": False},
-            {"id": "sim_3", "User": "Siti Aminah", "Merchant": "Mamak Corner", "Category": "Food & Dining", "Amount": 15.60, "Date": "2025-06-05", "Source": "manual", "Flagged": False},
-            {"id": "sim_4", "User": "Teoh Wei Jie", "Merchant": "Steam Games Store", "Category": "Entertainment", "Amount": 120.00, "Date": "2025-06-01", "Source": "manual", "Flagged": True},
-            {"id": "sim_5", "User": "Teoh Wei Jie", "Merchant": "Grab Food", "Category": "Food & Dining", "Amount": 34.50, "Date": "2025-06-04", "Source": "ocr", "Flagged": False},
-            {"id": "sim_6", "User": "Teoh Wei Jie", "Merchant": "Digi Telecommunications", "Category": "Bills", "Amount": 50.00, "Date": "2025-06-06", "Source": "manual", "Flagged": False},
-            {"id": "sim_7", "User": "Arun Kumar", "Merchant": "Shell Petrol", "Category": "Transport", "Amount": 40.00, "Date": "2025-06-08", "Source": "manual", "Flagged": False},
-            {"id": "sim_8", "User": "Arun Kumar", "Merchant": "Giant Hypermarket", "Category": "Shopping", "Amount": 115.30, "Date": "2025-06-11", "Source": "ocr", "Flagged": False},
-            {"id": "sim_9", "User": "Arun Kumar", "Merchant": "Kopi Kebun", "Category": "Food & Dining", "Amount": 18.00, "Date": "2025-06-12", "Source": "manual", "Flagged": False},
-            {"id": "sim_10", "User": "Nurul Izzah", "Merchant": "Nasi Kandar Pelita", "Category": "Food & Dining", "Amount": 12.80, "Date": "2025-06-14", "Source": "ocr", "Flagged": False},
+            {"id": "sim_1", "user": "Siti Aminah", "merchant": "RapidKL LRT", "category": "Transport", "amount": 4.50, "date": "2025-06-02", "source": "manual", "flagged": False},
+            {"id": "sim_2", "user": "Siti Aminah", "merchant": "Guardian Pharmacy", "category": "Shopping", "amount": 42.10, "date": "2025-06-03", "source": "ocr", "flagged": False},
+            {"id": "sim_3", "user": "Siti Aminah", "merchant": "Mamak Corner", "category": "Food & Dining", "amount": 15.60, "date": "2025-06-05", "source": "manual", "flagged": False},
+            {"id": "sim_4", "user": "Teoh Wei Jie", "merchant": "Steam Games Store", "category": "Entertainment", "amount": 120.00, "date": "2025-06-01", "source": "manual", "flagged": True},
+            {"id": "sim_5", "user": "Teoh Wei Jie", "merchant": "Grab Food", "category": "Food & Dining", "amount": 34.50, "date": "2025-06-04", "source": "ocr", "flagged": False},
+            {"id": "sim_6", "user": "Teoh Wei Jie", "merchant": "Digi Telecommunications", "category": "Bills", "amount": 50.00, "date": "2025-06-06", "source": "manual", "flagged": False},
+            {"id": "sim_7", "user": "Arun Kumar", "merchant": "Shell Petrol", "category": "Transport", "amount": 40.00, "date": "2025-06-08", "source": "manual", "flagged": False},
+            {"id": "sim_8", "user": "Arun Kumar", "merchant": "Giant Hypermarket", "category": "Shopping", "amount": 115.30, "date": "2025-06-11", "source": "ocr", "flagged": False},
+            {"id": "sim_9", "user": "Arun Kumar", "merchant": "Kopi Kebun", "category": "Food & Dining", "amount": 18.00, "date": "2025-06-12", "source": "manual", "flagged": False},
+            {"id": "sim_10", "user": "Nurul Izzah", "merchant": "Nasi Kandar Pelita", "category": "Food & Dining", "amount": 12.80, "date": "2025-06-14", "source": "ocr", "flagged": False},
         ]
 
 
@@ -198,7 +198,7 @@ def show_admin():
         total_transactions_db = sim_user_tx_sum + current_user_tx_sum
         
         current_user_ocr_cnt = sum(1 for tx in st.session_state.get("transactions", []) if tx.get("source") == "ocr")
-        simulated_ocr_cnt = sum(1 for tx in st.session_state.admin_simulated_transactions if tx.get("Source") == "ocr")
+        simulated_ocr_cnt = sum(1 for tx in st.session_state.admin_simulated_transactions if tx.get("source") == "ocr")
         total_receipts_uploaded = current_user_ocr_cnt + simulated_ocr_cnt
         
         current_alerts_count = sum(1 for a in st.session_state.get("alerts", []) if not a.get("dismissed", False))
@@ -447,27 +447,27 @@ def show_admin():
             if "flagged" not in tx:
                 tx["flagged"] = False
             ledger_list.append({
-                "Transaction ID": str(tx.get("id")),
-                "User": "Amirul Syafiq",
-                "Merchant": tx.get("merchant", "Unknown Merchant"),
-                "Category": tx.get("category", "Other"),
-                "Amount (RM)": float(tx.get("amount", 0.0)),
-                "Date": tx.get("date", "2025-06-18"),
-                "Source (OCR/Manual)": tx.get("source", "manual").upper(),
-                "Flagged": tx["flagged"]
+                "id": str(tx.get("id")),
+                "user": tx.get("user", "Amirul Syafiq"),
+                "merchant": tx.get("merchant", "Unknown Merchant"),
+                "category": tx.get("category", "Other"),
+                "amount": float(tx.get("amount", 0.0)),
+                "date": tx.get("date", "2025-06-18"),
+                "source": tx.get("source", "manual").upper(),
+                "flagged": tx["flagged"]
             })
             
         # 2. Simulated Pooled Transactions
         for tx in st.session_state.admin_simulated_transactions:
             ledger_list.append({
-                "Transaction ID": str(tx["id"]),
-                "User": tx["User"],
-                "Merchant": tx["Merchant"],
-                "Category": tx["Category"],
-                "Amount (RM)": float(tx["Amount"]),
-                "Date": tx["Date"],
-                "Source (OCR/Manual)": tx["Source"].upper(),
-                "Flagged": tx["Flagged"]
+                "id": str(tx.get("id")),
+                "user": tx.get("user", "Amirul Syafiq"),
+                "merchant": tx.get("merchant", "Unknown Merchant"),
+                "category": tx.get("category", "Other"),
+                "amount": float(tx.get("amount", 0.0)),
+                "date": tx.get("date", "2025-06-18"),
+                "source": tx.get("source", "manual").upper(),
+                "flagged": tx.get("flagged", False)
             })
             
         df_ledger = pd.DataFrame(ledger_list)
@@ -476,20 +476,20 @@ def show_admin():
         st.write("##### 🔍 " + ("Audit Filters" if not is_bm else "Saringan Audit"))
         filt_c1, filt_c2, filt_c3, filt_c4 = st.columns(4)
         with filt_c1:
-            all_users_options = ["All" if not is_bm else "Semua Pengguna"] + sorted(list(df_ledger["User"].unique()))
+            all_users_options = ["All" if not is_bm else "Semua Pengguna"] + sorted(list(df_ledger["user"].unique()))
             selected_filt_user = st.selectbox("Audited User Name" if not is_bm else "Nama Pengguna Diaudit", options=all_users_options, key="audit_filter_user")
         with filt_c2:
-            all_cats_options = ["All" if not is_bm else "Semua Kategori"] + sorted(list(df_ledger["Category"].unique()))
+            all_cats_options = ["All" if not is_bm else "Semua Kategori"] + sorted(list(df_ledger["category"].unique()))
             selected_filt_cat = st.selectbox("Category Group" if not is_bm else "Kumpulan Kategori", options=all_cats_options, key="audit_filter_category")
         with filt_c3:
-            df_ledger["Datetime"] = pd.to_datetime(df_ledger["Date"])
+            df_ledger["Datetime"] = pd.to_datetime(df_ledger["date"])
             min_date_val = df_ledger["Datetime"].min().date() if not df_ledger.empty else datetime.date(2025, 6, 1)
             max_date_val = df_ledger["Datetime"].max().date() if not df_ledger.empty else datetime.date(2025, 6, 30)
             
             selected_filt_dates = st.date_input("Audit Date Range" if not is_bm else "Julat Tarikh Audit", value=(min_date_val, max_date_val), key="audit_filter_dates")
         with filt_c4:
-            min_amt_val = float(df_ledger["Amount (RM)"].min()) if not df_ledger.empty else 0.0
-            max_amt_val = float(df_ledger["Amount (RM)"].max()) if not df_ledger.empty else 200.0
+            min_amt_val = float(df_ledger["amount"].min()) if not df_ledger.empty else 0.0
+            max_amt_val = float(df_ledger["amount"].max()) if not df_ledger.empty else 200.0
             
             selected_filt_amts = st.slider(
                 "Amount Horizon (RM)" if not is_bm else "Kadar Amaun (RM)",
@@ -503,10 +503,10 @@ def show_admin():
         df_ledger_filtered = df_ledger.copy()
         
         if selected_filt_user not in ["All", "Semua Pengguna"]:
-            df_ledger_filtered = df_ledger_filtered[df_ledger_filtered["User"] == selected_filt_user]
+            df_ledger_filtered = df_ledger_filtered[df_ledger_filtered["user"] == selected_filt_user]
             
         if selected_filt_cat not in ["All", "Semua Kategori"]:
-            df_ledger_filtered = df_ledger_filtered[df_ledger_filtered["Category"] == selected_filt_cat]
+            df_ledger_filtered = df_ledger_filtered[df_ledger_filtered["category"] == selected_filt_cat]
             
         if isinstance(selected_filt_dates, tuple) and len(selected_filt_dates) == 2:
             f_start, f_end = selected_filt_dates
@@ -516,22 +516,22 @@ def show_admin():
             ]
             
         df_ledger_filtered = df_ledger_filtered[
-            (df_ledger_filtered["Amount (RM)"] >= selected_filt_amts[0]) & 
-            (df_ledger_filtered["Amount (RM)"] <= selected_filt_amts[1])
+            (df_ledger_filtered["amount"] >= selected_filt_amts[0]) & 
+            (df_ledger_filtered["amount"] <= selected_filt_amts[1])
         ]
         
         # Prepare aesthetic dataframe for user layout (st.dataframe)
         display_ledger_rows = []
         for idx, row in df_ledger_filtered.iterrows():
-            is_flagged = row["Flagged"]
+            is_flagged = row["flagged"]
             display_ledger_rows.append({
-                "Transaction ID": row["Transaction ID"],
-                "User": row["User"],
-                "Merchant": f"⚠️ {row['Merchant']}" if is_flagged else row["Merchant"],
-                "Category": row["Category"],
-                "Amount (RM)": row["Amount (RM)"],
-                "Date": row["Date"],
-                "Source (OCR/Manual)": row["Source (OCR/Manual)"],
+                "Transaction ID": row["id"],
+                "User": row["user"],
+                "Merchant": f"⚠️ {row['merchant']}" if is_flagged else row["merchant"],
+                "Category": row["category"],
+                "Amount (RM)": row["amount"],
+                "Date": row["date"],
+                "Source (OCR/Manual)": row["source"],
                 "Ledger Status": "⚠️ Suspicious Flag" if is_flagged else "Normal/Approved"
             })
             
@@ -569,8 +569,8 @@ def show_admin():
             full_tx_options_map = {}
             full_tx_display_strings = []
             for tx in ledger_list:
-                flag_label = " (⚠️ Flagged)" if tx["Flagged"] else ""
-                label_str = f"#{tx['Transaction ID']} - {tx['User']} - {tx['Merchant']} - RM {tx['Amount']:.2f}{flag_label}"
+                flag_label = " (⚠️ Flagged)" if tx["flagged"] else ""
+                label_str = f"#{tx['id']} - {tx.get('user', 'Amirul Syafiq')} - {tx['merchant']} - RM {tx['amount']:.2f}{flag_label}"
                 full_tx_options_map[label_str] = tx
                 full_tx_display_strings.append(label_str)
                 
@@ -583,8 +583,8 @@ def show_admin():
             st.markdown("<div style='margin-top:28px;'></div>", unsafe_allow_html=True)
             if selected_tx_flag_label:
                 tx_record_dict = full_tx_options_map[selected_tx_flag_label]
-                t_id = tx_record_dict["Transaction ID"]
-                t_flagged = tx_record_dict["Flagged"]
+                t_id = tx_record_dict["id"]
+                t_flagged = tx_record_dict["flagged"]
                 
                 toggle_btn_txt = "🏳️ Clear Flag" if t_flagged else "⚠️ Flag Suspicious"
                 if is_bm:
@@ -596,7 +596,7 @@ def show_admin():
                         # update simulated rows
                         for sim_t in st.session_state.admin_simulated_transactions:
                             if sim_t["id"] == t_id:
-                                sim_t["Flagged"] = not sim_t["Flagged"]
+                                sim_t["flagged"] = not sim_t.get("flagged", False)
                                 break
                     else:
                         # update user live session transactions
