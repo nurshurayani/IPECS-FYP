@@ -238,7 +238,7 @@ def show_account():
     # 5. ABOUT SECTION
     with st.expander("ℹ️ About IPECS" if not is_bm else "ℹ️ Mengenai IPECS", expanded=False):
         st.markdown(f"""
-        **App Name / Nama Aplikasi:** IPECS — Intelligent Personal Expense Classification System  
+        **App Name / Nama Aplikasi:** IPECS — Intelligent Personal Expense Categorization System  
         **Version / Versi:** 1.0.0  
         **Developed by / Dibangunkan oleh:** Nurshurayani  
         **Institution / Institusi:** Universiti Malaysia Sabah  

@@ -75,7 +75,7 @@ if "lang" not in st.session_state:
     st.session_state.lang = "EN"
 
 if "page" not in st.session_state:
-    st.session_state.page = "User Account"
+    st.session_state.page = "Dashboard"
 
 if "user_profile" not in st.session_state:
     st.session_state.user_profile = {

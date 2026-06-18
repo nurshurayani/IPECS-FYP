@@ -21,7 +21,7 @@ def show_dashboard():
     t_upload = "📤 Muat Naik Resit" if is_bm else "📤 Upload Receipt"
     
     st.markdown(f"<h2>{t_title}</h2>", unsafe_allow_html=True)
-    st.caption("IPECS • Intelligent Personal Expense Classification System")
+    st.caption("IPECS • Intelligent Personal Expense Categorization System")
     st.divider()
 
     txs = st.session_state.transactions
@@ -45,9 +45,12 @@ def show_dashboard():
         delta_color = "normal" if pct_remaining >= 20 else "inverse"
         st.metric(t_remain, f"RM {budget_remaining:.2f}", delta=f"{pct_remaining:.1f}% left", delta_color=delta_color)
     with col3:
-        st.metric(t_tx, f"{tx_week_count} txs")
+        st.metric(t_tx, f"{tx_week_count} transactions")
     with col4:
-        st.metric(t_alerts, f"{active_alerts_count} active", delta="Check Alerts!" if active_alerts_count > 0 else "Safe", delta_color="inverse" if active_alerts_count > 0 else "normal")
+        st.metric(t_alerts, f"{active_alerts_count} active") if active_alerts_count > 0:
+        if st.button("🔔 Check Alerts!", use_container_width=True):
+            st.session_state.page = "AI Forecast & Alerts"
+            st.rerun()
 
     st.write("")
 
