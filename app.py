@@ -204,7 +204,7 @@ with c2:
         st.session_state.page = "Receipt & Transaction Entry"
         st.rerun()
 with c3:
-    if st.button("🔀\nTxn" if not is_bm else "🔀\nTranx", use_container_width=True):
+    if st.button("🔀\nTransaction" if not is_bm else "🔀\nTransaksi", use_container_width=True):
         st.session_state.page = "Transaction & Category Management"
         st.rerun()
 with c4:

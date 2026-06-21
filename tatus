@@ -1,0 +1,29 @@
+[33mcommit ec377b4f96a7c9952a77edc8bbd5d18298f8ed87[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: nurshurayani <nurshuraya_bi23@iluv.ums.edu.my>
+Date:   Sun Jun 21 14:58:49 2026 +0800
+
+    Remove secret from project
+
+[33mcommit 771357bd592cdb8173616d37c7047d5ef78c7f9a[m
+Author: nurshurayani <nurshuraya_bi23@iluv.ums.edu.my>
+Date:   Sun Jun 21 14:57:59 2026 +0800
+
+    Remove secret from project
+
+[33mcommit 3bbbdadb2461cf6b7d7d1b5dc44bcdb19e5345d5[m
+Author: nurshurayani <nurshuraya_bi23@iluv.ums.edu.my>
+Date:   Sun Jun 21 14:56:25 2026 +0800
+
+    Change EasyOCR to Tesseract to Gemini AI
+
+[33mcommit e267d980b67c02d5707dc3c50c3c751c41ff264f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: nurshurayani <nurshuraya_bi23@iluv.ums.edu.my>
+Date:   Sun Jun 21 13:57:26 2026 +0800
+
+    Troubleshoot Gemini AI version
+
+[33mcommit 6b361a502e706f61f2d380a942fc64483e0dc7a2[m
+Author: nurshurayani <nurshuraya_bi23@iluv.ums.edu.my>
+Date:   Sat Jun 20 23:36:16 2026 +0800
+
+    Fix Google Gemini AI
