@@ -43,20 +43,20 @@ if "logged_in" not in st.session_state:
 
 if not st.session_state.logged_in:
     st.markdown("<h1 style='text-align:center;color:#0F7B6C'>💳 IPECS</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center;color:#555;'>Intelligent Personal Expense Classification System</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center;color:#555;'>Intelligent Personal Expense Categorization System</p>", unsafe_allow_html=True)
     st.write("")
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
         if st.button("Login", use_container_width=True):
-            if username == "amirul" and password == "ipecs2025":
+            if username == "amirul" and password == "ipecs2026":
                 st.session_state.logged_in = True
                 st.session_state.page = "Dashboard"
                 st.rerun()
             else:
                 st.error("Incorrect username or password")
-        st.caption("Demo credentials — Username: amirul | Password: ipecs2025")
+        st.caption("Demo credentials — Username: amirul | Password: ipecs2026")
     st.stop()
 
 # Initialize session states
@@ -90,7 +90,7 @@ if "admin_authenticated" not in st.session_state:
 # Sidebar
 with st.sidebar:
     st.markdown("<h2 style='color:#0F7B6C; margin-bottom:0;'>💳 IPECS</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='color:#0a5c51; font-size:9px; text-transform:uppercase; font-family:monospace; margin-top:0;'>Intelligent Personal Expense Classification System</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#0a5c51; font-size:9px; text-transform:uppercase; font-family:monospace; margin-top:0;'>Intelligent Personal Expense Categorization System</p>", unsafe_allow_html=True)
 
     st.divider()
 

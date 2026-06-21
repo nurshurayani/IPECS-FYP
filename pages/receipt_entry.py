@@ -64,7 +64,7 @@ def extract_with_gemini(image_bytes):
         """
 
         response = client.models.generate_content(
-            model="gemini-pro-vision",
+            model="gemini-2.0-flash",
             contents=[prompt, img]
         )
 
